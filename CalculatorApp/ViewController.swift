@@ -10,11 +10,28 @@ import UIKit
 struct Operation {
     var num1: Double = 0.0
     var num2: Double = 0.0
-    var operationString: String = ""
     
     var plus: Double {
         get {
             return num1 + num2
+        }
+    }
+    
+    var minus: Double {
+        get {
+            return num1 - num2
+        }
+    }
+    
+    var multiply: Double {
+        get {
+            return num1 * num2
+        }
+    }
+    
+    var divide: Double {
+        get {
+            return num1 / num2
         }
     }
 }
@@ -91,15 +108,18 @@ class ViewController: UIViewController {
         let firstNum: Double = Double(firstNumString) ?? 0.0
         let secondNum: Double = Double(secondNumString) ?? 0.0
         
+        operation.num1 = firstNum
+        operation.num2 = secondNum
+        
         switch operatorKey {
         case "+":
-            result = firstNum + secondNum
+            result = operation.plus
         case "-":
-            result = firstNum - secondNum
+            result = operation.minus
         case "÷":
-            result = firstNum / secondNum
+            result = operation.divide
         case "x":
-            result = firstNum * secondNum
+            result = operation.multiply
         default:
             print("잘못된 연산자입니다.")
         }
