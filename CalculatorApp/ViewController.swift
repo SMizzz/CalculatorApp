@@ -15,35 +15,46 @@ enum CalculationOperator: String {
 }
 
 struct Operation {
-    var operationText: String = ""
+    var index: [Int] = []
+    var resultString = ""
     var num1: Double = 0.0
     var num2: Double = 0.0
-        
+    var result = 0.0
+    var operate: [String] = ["x", "/", "+", "-"]
+    
     mutating func performOperation(_ stringArray: [String]) -> Double {
-        // #1 우리는 먼저 두 가지의 요소만 받을 것이므로, array[0]과 array[1] 요소를 저장한다.
-        let firstNumString: String = stringArray[0]
-        let secondNumString: String = stringArray[1]
+        var arr = stringArray
+        for oper in operate {
+          for i in 0...arr.count - 1 {
+            if oper == arr[i] {
+              switch oper {
+              case CalculationOperator.multiply.rawValue:
+                  result = Double(arr[i - 1])! * Double(arr[i + 1])!
+              case CalculationOperator.divide.rawValue:
+                  result = Double(arr[i - 1])! / Double(arr[i + 1])!
+              case CalculationOperator.plus.rawValue:
+                  result = Double(arr[i - 1])! + Double(arr[i + 1])!
+              case CalculationOperator.minus.rawValue:
+                  result = Double(arr[i - 1])! - Double(arr[i + 1])!
+                default:
+                  break
+              }
+              resultString = String(result)
+              arr[i] = resultString
+              index.append(i)
+            }
+          }
 
-        // #2 Double타입으로 변환하여 struct에 보내줄 값을 상수에 저장한다.
-        self.num1 = Double(firstNumString) ?? 0.0
-        self.num2 = Double(secondNumString) ?? 0.0
-        
-        switch operationText {
-        case CalculationOperator.plus.rawValue:
-            return num1 + num2
-        case CalculationOperator.minus.rawValue:
-            return num1 - num2
-        case CalculationOperator.multiply.rawValue:
-            return num1 * num2
-        case CalculationOperator.divide.rawValue:
-            return num1 / num2
-        default:
-            print("? 없는 연산자입니다.")
-            return 0.0
+          index.sort(by: > )
+          for i in index {
+            arr.remove(at: i + 1)
+            arr.remove(at: i - 1)
+          }
+          index.removeAll()
         }
+        return Double(arr[0]) ?? 0.0
     }
 }
-
 
 class ViewController: UIViewController {
     var operation = Operation()
@@ -51,6 +62,7 @@ class ViewController: UIViewController {
     var numArray: [Double] = []
     var numStringArray: [String] = []
     var operatorKey: String = ""
+    var operatorArray: [String] = []
     
     var pressOperationBtnbyUser: String = ""
     var result = 0.0
@@ -79,26 +91,16 @@ class ViewController: UIViewController {
     
     @IBAction func pressOperationButton(_ sender: UIButton) {
         numStringArray.append(displayNumberString)
-    
         guard let operationText = sender.titleLabel?.text else { return }
-        operation.operationText = operationText
+        numStringArray.append(operationText)
         displayNumberString = ""
         numberLabel.text = ""
     }
     
     @IBAction func pressResultButton(_ sender: Any) {
         numStringArray.append(displayNumberString)
-        
-        // #1 만약 둘 중 한 숫자를 받지 못한다면 값은 0으로 넣는다.
-        if numStringArray[0] == "" {
-            numStringArray[0] = "0"
-        } else if numStringArray[1] == "" {
-           numStringArray[1] = "0"
-        }
-        
         result = operation.performOperation(numStringArray)
         
-        // #2 #1의 경우 값을 0으로 넣었더니 결과값이 infinity가 나와서 0.0으로 바꾸어주는 역할을 한다.
         if result.isInfinite {
             result = 0.0
         }
