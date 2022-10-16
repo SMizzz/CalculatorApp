@@ -16,15 +16,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLK-Qr-tMo">
-                                <rect key="frame" x="50" y="177" width="290" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="FLj-OP-sWJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="L37-iG-tT3">
+                                <rect key="frame" x="50" y="102" width="290" height="105"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLK-Qr-tMo">
+                                        <rect key="frame" x="0.0" y="0.0" width="290" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csV-xr-6E5">
+                                        <rect key="frame" x="0.0" y="55" width="290" height="50"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rto-bl-JdQ">
                                 <rect key="frame" x="60" y="253" width="270" height="338"/>
                                 <subviews>
@@ -264,6 +272,7 @@
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="numberBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vQ0-bw-ge5"/>
+                                                                    <action selector="pressDotButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PNj-3d-RJt"/>
                                                                 </connections>
                                                             </button>
                                                         </subviews>
@@ -336,14 +345,15 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="rto-bl-JdQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5fz-fX-rxw"/>
-                            <constraint firstItem="RLK-Qr-tMo" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="130" id="Mfg-ch-idT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L37-iG-tT3" secondAttribute="trailing" constant="50" id="E4j-gN-f2Y"/>
+                            <constraint firstItem="L37-iG-tT3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="Ffm-bV-3AZ"/>
                             <constraint firstItem="rto-bl-JdQ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Odl-ml-5Be"/>
-                            <constraint firstItem="RLK-Qr-tMo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="Tov-35-qSm"/>
-                            <constraint firstAttribute="trailing" secondItem="RLK-Qr-tMo" secondAttribute="trailing" constant="50" id="eZd-Wf-O4W"/>
+                            <constraint firstItem="L37-iG-tT3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="55" id="dNO-OJ-4Lc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="numberLabel" destination="RLK-Qr-tMo" id="O7M-8B-ZaX"/>
+                        <outlet property="resultLabel" destination="csV-xr-6E5" id="pPn-pG-nGg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
