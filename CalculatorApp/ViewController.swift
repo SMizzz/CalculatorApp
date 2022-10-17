@@ -30,7 +30,7 @@ struct Operation {
             
             if arr.contains("x") {
                 oper = CalculationOperator.multiply
-            } else if arr.contains("/") {
+            } else if arr.contains("÷") {
                 oper = CalculationOperator.divide
             } else if arr.contains("+") {
                 oper = CalculationOperator.plus
